@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <section>
+        <h1>Qui êtes tu ?</h1>
+        <select name="name" id="name">
+            <option value="default" selected>Votre Prénom</option>
+            <option value="berengere">Bérengere</option>
+            <option value="guillaume">Guillaume</option>
+            <option value="benoit">Benoit</option>
+            <option value="natalie">Natalie</option>
+            <option value="papa">Bertrand</option>
+            <option value="maman">Cécile</option>
+        </select>
+        <button>Valider</button>
+    </section>
+    <h1 id="response"></h1>
+    <script>
+        var file = [
+            { peopleFrom: 'papa', peopleTo: 'guillaume' },
+            { peopleFrom: 'maman', peopleTo: 'berengere' },
+            { peopleFrom: 'benoit', peopleTo: 'papa' },
+            { peopleFrom: 'natalie', peopleTo: 'maman' },
+            { peopleFrom: 'berengere', peopleTo: 'natalie' },
+            { peopleFrom: 'guillaume', peopleTo: 'benoit' }
+        ]
+        const prénom = {
+            'berengere': 'Bérengere',
+            'guillaume': 'Guillaume',
+            'benoit': 'Benoit',
+            'natalie': 'Natalie',
+            'papa': 'Bertrand',
+            'maman': 'Cécile',
+        }
+        var peopleFrom = null
+
+        const select = document.querySelector('select')
+        select.addEventListener('change', event => {
+            peopleFrom = event.target.value
+            peopleFromBienEcrit = event.target
+            console.log(event.target)
+        })
+
+        const button = document.querySelector('button')
+        const h1 = document.querySelector('#response')
+        const section = document.querySelector('section')
+        
+        button.addEventListener('click', event => {
+            if (peopleFrom == null) {
+                alert('Selectionné un prénom')
+            } else {
+                section.style.display = 'none'
+                var peopleTo
+                for (const people of file) {
+                    if (people.peopleFrom == peopleFrom) {
+                        peopleTo = people.peopleTo
+                    }
+                }
+                h1.innerText = prénom[peopleFrom] + ' tu dois offrir un cadeaux à ' + prénom[peopleTo]
+            }
+            
+        })
+    </script>
+</body>
+</html>
